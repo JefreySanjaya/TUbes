@@ -3,6 +3,7 @@ package com.example.ugd
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -13,25 +14,30 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var inputEmail: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
     private lateinit var mainLayout: ConstraintLayout
+    lateinit var mBundle : Bundle
+
+     var lUsername: String = ""
+     var lPassword: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //ubah title pada aplikasi
+//        getBundle()
+
         setTitle("User Login")
 
         inputEmail = findViewById(R.id.inputLayoutEmail)
         inputPassword = findViewById(R.id.inputLayoutPassword)
         mainLayout = findViewById(R.id.mainLayout)
-        val btnRegister: TextView = findViewById(R.id.btnSignUp)
-        val btnLogin: Button = findViewById(R.id.btnLogin)
+        val btnSignUp = findViewById<Button>(R.id.btnSign)
+        val btnLogin : Button = findViewById(R.id.btnLogin)
 
         //aksi btnRegister/btn sign up
-        btnRegister.setOnClickListener(View.OnClickListener {
-            val moveHome = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(moveHome)
-        })
+        btnSignUp.setOnClickListener{
+            val moveReg = Intent(this, RegisterActivity::class.java)
+            startActivity(moveReg)
+        }
 
         //aksi pada btn login
         btnLogin.setOnClickListener(View.OnClickListener {
@@ -50,13 +56,24 @@ class LoginActivity : AppCompatActivity() {
                 checkLogin = false
             }
 
-            if (username == "admin" && password == "admin") checkLogin = true
+            if ((username == lUsername && password == lPassword) || (username != "" && password != "")) {
+                Log.d("tes","check login true")
+                checkLogin = true
+            }
 
-            if (!checkLogin)
+            if (!checkLogin){
+                Log.d("tes","check login false")
                 return@OnClickListener
-
-            val moveHome = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(moveHome)
+            } else {
+                val moveHome = Intent(this@LoginActivity, Home::class.java)
+                startActivity(moveHome)
+            }
         })
+    }
+
+    fun getBundle(){
+        mBundle = intent.getBundleExtra("register")!!
+        lUsername = mBundle.getString("username")!!
+        lPassword = mBundle.getString("password")!!
     }
 }

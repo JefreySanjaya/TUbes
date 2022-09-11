@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="201dp"
-        android:layout_height="165dp"
+        android:layout_width="195dp"
+        android:layout_height="158dp"
         android:layout_marginTop="1dp"
         android:src="@drawable/salonku"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +50,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -66,6 +67,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -177,7 +179,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/btnSign"
+            android:id="@+id/btnSignUp"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -204,11 +206,11 @@
             android:gravity="end"
             android:text="Already have an account?"
             android:textColor="@color/black" />
-s
-        <TextView
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnSignIn"
             android:layout_weight="1"
             android:text="Sign in"
             android:textSize="15sp"
