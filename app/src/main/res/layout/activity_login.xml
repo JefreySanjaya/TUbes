@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            app:startIconDrawable="@drawable/ic_email_24"
             android:hint="Email"
             app:errorEnabled="true">
 
@@ -62,6 +63,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="61dp"
+            app:startIconDrawable="@drawable/ic_lock_24"
             android:hint="Password"
             app:errorEnabled="true">
 

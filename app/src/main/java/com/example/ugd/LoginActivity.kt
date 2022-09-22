@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        getBundle()
+        //getBundle()
 
         setTitle("User Login")
 
@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
             if ((username == lUsername && password == lPassword) || (username != "" && password != "")) {
                 Log.d("tes","check login true")
                 checkLogin = true
+
             }
 
             if (!checkLogin){
