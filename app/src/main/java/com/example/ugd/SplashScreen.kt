@@ -11,7 +11,7 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
+//asdsd
         // This is used to hide the status bar and make
         // the splash screen as a full screen activity.
         window.setFlags(
