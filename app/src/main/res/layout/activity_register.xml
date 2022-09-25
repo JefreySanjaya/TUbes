@@ -22,7 +22,6 @@
         style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Create an Account"
         android:textColor="@color/black"
@@ -45,7 +44,7 @@
             android:id="@+id/inputLayoutUsername"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:hint="Username"
             app:errorEnabled="true">
 
@@ -61,7 +60,7 @@
             android:id="@+id/inputLayoutPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:hint="Password"
             android:layout_marginTop="10dp"
             app:errorEnabled="true">
@@ -78,7 +77,7 @@
             android:id="@+id/inputLayoutEmail"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:hint="Email"
             android:layout_marginTop="10dp"
             app:errorEnabled="true">
@@ -94,7 +93,7 @@
             android:id="@+id/inputLayoutDate"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:hint="Date of Birth"
             android:layout_marginTop="10dp"
             app:errorEnabled="true">
@@ -110,8 +109,8 @@
             android:id="@+id/inputLayoutPhone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Phone"
+            android:layout_height="65dp"
+            android:hint="Phone Number"
             android:layout_marginTop="10dp"
             app:errorEnabled="true">
 
@@ -121,9 +120,6 @@
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -132,24 +128,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-        android:padding="8dp">
+        android:padding="1dp">
 
         <TextView
             android:id="@+id/textTerms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
             android:fontFamily="@font/poppinssemibold"
-            android:text="By continuing you agree to our" />
-
-        <TextView
-            android:layout_width="333dp"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="Terms of Services"
-            android:textColor="@color/black" />
+            android:text="By continuing you agree to our Terms of Services" />
     </LinearLayout>
 
     <LinearLayout
@@ -158,12 +146,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        android:padding="8dp">
+        android:padding="1dp">
 
         <TextView
             android:layout_width="606dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
             android:text="and Privacy Policy"
             android:fontFamily="@font/poppinssemibold"/>
     </LinearLayout>
@@ -187,35 +176,5 @@
             android:backgroundTint="@color/primary"
             android:fontFamily="@font/poppinssemibold"
             android:text="Sign up" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Already have an account?"
-            android:textColor="@color/black" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSignIn"
-            android:layout_weight="1"
-            android:text="Sign in"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/poppinssemibold"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

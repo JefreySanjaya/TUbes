@@ -3,6 +3,7 @@ package com.example.ugd
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugd.entity.Model
@@ -13,6 +14,7 @@ class RVModelAdapter (private  val data: Array<Model>) : RecyclerView.Adapter<RV
     class viewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
         val tvModel: TextView = itemView.findViewById(R.id.tv_model)
         val tvDetailsModel: TextView = itemView.findViewById(R.id.tv_details_model)
+        val gambarModel: ImageView = itemView.findViewById(R.id.gambarModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVModelAdapter.viewHolder {
@@ -24,6 +26,7 @@ class RVModelAdapter (private  val data: Array<Model>) : RecyclerView.Adapter<RV
         val currentItem = data[position]
         holder.tvModel.text=currentItem.name
         holder.tvDetailsModel.text=currentItem.harga
+        holder.gambarModel.setImageResource(currentItem.gambar)
     }
 
     override fun getItemCount(): Int {

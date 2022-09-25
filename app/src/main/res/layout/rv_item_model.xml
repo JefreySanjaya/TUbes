@@ -8,26 +8,30 @@
 
     <TextView
         android:id="@+id/tv_details_model"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:text="Harga"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/tv_model"
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Harga"
+        app:layout_constraintStart_toEndOf="@+id/gambarModel"
+        app:layout_constraintTop_toTopOf="parent" />
+s
+    <TextView
+        android:id="@+id/tv_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:text="Model"
-        app:layout_constraintBottom_toTopOf="@id/tv_details_model"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toEndOf="@+id/gambarModel"
+        app:layout_constraintTop_toBottomOf="@+id/tv_details_model" />
+s
+    <ImageView
+        android:id="@+id/gambarModel"
+        android:layout_width="103dp"
+        android:layout_height="76dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761"
-        />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

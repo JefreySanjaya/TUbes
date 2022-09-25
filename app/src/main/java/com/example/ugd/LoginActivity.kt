@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //getBundle()
+        getBundle()
 
         setTitle("User Login")
 
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 checkLogin = false
             }
 
-            if ((username == lUsername && password == lPassword) || (username != "" && password != "")) {
+            if ((username == lUsername && password == lPassword && username !="" && password !="")) {
                 Log.d("tes","check login true")
                 checkLogin = true
 
@@ -67,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 return@OnClickListener
             } else {
                 val moveHome = Intent(this@LoginActivity, Home::class.java)
+                moveHome.putExtra("user", mBundle)
                 startActivity(moveHome)
             }
         })

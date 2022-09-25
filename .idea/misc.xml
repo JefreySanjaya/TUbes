@@ -3,18 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/drawable/ic_account_24.xml" value="0.229" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/activity_home.xml" value="0.24947916666666667" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/fragment_account.xml" value="0.2484375" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/fragment_exit.xml" value="0.24947916666666667" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/fragment_home.xml" value="0.2484375" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/fragment_list.xml" value="0.2484375" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/layout/rv_item_model.xml" value="0.1" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/3/UGD/JADI/UGD_Kelompok2/app/src/main/res/menu/home.xml" value="0.24947916666666667" />
-        <entry key="..\:/TUbes/app/src/main/res/layout/activity_home.xml" value="0.1308876811594203" />
-        <entry key="..\:/TUbes/app/src/main/res/layout/activity_splash_screen.xml" value="0.1308876811594203" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/drawable/ic_baseline_person_pin_24.xml" value="0.2375" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/activity_fragment_profile.xml" value="0.24947916666666667" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/fragment_exit.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/fragment_list.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/fragment_profile.xml" value="0.24947916666666667" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/TUbes/app/src/main/res/layout/rv_item_model.xml" value="0.25" />
       </map>
     </option>
   </component>
