@@ -18,7 +18,7 @@ class FragmentList : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_list,container,false)
     }
-    // anjay mabar mantap
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context)
