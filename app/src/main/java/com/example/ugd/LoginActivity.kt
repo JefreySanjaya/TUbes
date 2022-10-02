@@ -72,7 +72,6 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
-
     fun getBundle(){
         mBundle = intent.getBundleExtra("register")!!
         lUsername = mBundle.getString("username")!!
