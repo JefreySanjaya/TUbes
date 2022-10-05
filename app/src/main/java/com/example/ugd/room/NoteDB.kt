@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Note::class],
-    version = 1
+    entities = [Note::class, User::class],
+    version = 2
 )
 abstract class NoteDB: RoomDatabase() {
 
+    abstract fun userDao() : UserDao
     abstract fun noteDao() : NoteDao
 
     companion object {

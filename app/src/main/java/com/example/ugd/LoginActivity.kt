@@ -1,80 +1,106 @@
 package com.example.ugd
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.textfield.TextInputLayout
+import com.example.ugd.databinding.ActivityLoginBinding
+import com.example.ugd.room.NoteDB
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var inputEmail: TextInputLayout
-    private lateinit var inputPassword: TextInputLayout
-    private lateinit var mainLayout: ConstraintLayout
-    lateinit var mBundle : Bundle
+    val db by lazy { NoteDB(this) }
+    private lateinit var binding: ActivityLoginBinding
+    lateinit var  mBundle: Bundle
 
-     var lUsername: String = ""
-     var lPassword: String = ""
+    private val key = "nameKey"
+    private val id = "idKey"
+    private val myPreference = "login"
+    var sharedPreferences: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_login)
 
-        getBundle()
+        getSupportActionBar()?.hide()
+        sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE)
 
-        setTitle("User Login")
+        val viewBinding = binding.root
+        val moveHome = Intent(this@LoginActivity, Home::class.java)
 
-        inputEmail = findViewById(R.id.inputLayoutEmail)
-        inputPassword = findViewById(R.id.inputLayoutPassword)
-        mainLayout = findViewById(R.id.mainLayout)
-        val btnSignUp = findViewById<Button>(R.id.btnSign)
-        val btnLogin : Button = findViewById(R.id.btnLogin)
+        if(!sharedPreferences!!.contains(key)){
+            val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+            editor.putString(key, "terisi")
+            editor.apply()
+            setContentView(R.layout.activity_splash_screen)
 
-        //aksi btnRegister/btn sign up
-        btnSignUp.setOnClickListener{
-            val moveReg = Intent(this, RegisterActivity::class.java)
-            startActivity(moveReg)
+            Handler(Looper.getMainLooper()).postDelayed({
+                setContentView(viewBinding)
+            }, 3000)
+        }else{
+            setContentView(viewBinding)
         }
 
-        //aksi pada btn login
+        if (intent.hasExtra("register")) {
+            mBundle = intent.getBundleExtra("register")!!
+            inputUsername.setText(mBundle.getString("username"))
+            inputPassword.setText(mBundle.getString("password"))
+        }
+
         btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
-            val username: String = inputEmail.getEditText()?.getText().toString()
-            val password: String = inputPassword.getEditText()?.getText().toString()
 
-            //pengecekan apakah inputan kosong
-            if (username.isEmpty()) {
-                inputEmail.setError("Email Must be Filled With Text")
-                checkLogin = false
-            }
-            //pengecekan apakah inputan kosong
-            if (password.isEmpty()) {
-                inputPassword.setError("Password Must be Filled With Text")
-                checkLogin = false
-            }
+            CoroutineScope(Dispatchers.IO).launch {
+                val users = db.userDao().getUser()
+                Log.d("LoginActivity ","dbResponse: $users")
 
-            if ((username == lUsername && password == lPassword && username !="" && password !="")) {
-                Log.d("tes","check login true")
-                checkLogin = true
+                for(i in users){
+                    if(inputUsername.text.toString() == i.username && inputPassword.text.toString() == i.password){
+                        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+                        editor.putString("id", i.id.toString())
+                        editor.apply()
+                        checkLogin=true
+                        break
+                    }
+                }
 
-            }
+                withContext(Dispatchers.Main){
+                    if((inputUsername.text.toString() == "admin" && inputPassword.text.toString() == "admin") || (checkLogin)){
+                        checkLogin = false
+                        startActivity(moveHome)
+                        finish()
+                    }else {
+                        if (inputLayoutUsername.getEditText()?.getText().toString().isEmpty()) {
+                            inputLayoutUsername.setError("Username must be filled with Text")
+                        }else if (inputLayoutUsername.getEditText()?.getText().toString() != "admin") {
+                            inputLayoutUsername.setError("Username false")
+                        }
 
-            if (!checkLogin){
-                Log.d("tes","check login false")
-                return@OnClickListener
-            } else {
-                val moveHome = Intent(this@LoginActivity, Home::class.java)
-                moveHome.putExtra("user", mBundle)
-                startActivity(moveHome)
+                        if (inputLayoutPassword.getEditText()?.getText().toString().isEmpty()) {
+                            inputLayoutPassword.setError("Password must ben filled with text")
+                        }else if (inputLayoutPassword.getEditText()?.getText().toString() != "admin") {
+                            inputLayoutPassword.setError("Password false")
+                        }
+                    }
+                }
             }
         })
+
+        btnSignUp.setOnClickListener {
+            val moveRegis = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(moveRegis)
+        }
     }
-    fun getBundle(){
-        mBundle = intent.getBundleExtra("register")!!
-        lUsername = mBundle.getString("username")!!
-        lPassword = mBundle.getString("password")!!
-    }
+
 }

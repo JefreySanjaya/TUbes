@@ -8,7 +8,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
+
 import android.app.NotificationChannel
+import com.example.ugd.room.NoteDB
+import com.example.ugd.room.User
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -21,14 +24,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.ugd.databinding.ActivityRegisterBinding
+import kotlinx.android.synthetic.main.activity_login.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
-
-    private lateinit var username : TextInputEditText
-    private lateinit var password : TextInputEditText
-    private lateinit var btnSignUp : Button
-
-    private var binding: ActivityRegisterBinding? = null
+    val db by lazy { NoteDB(this) }
+    private lateinit var binding: ActivityRegisterBinding
     private val CHANNEL_ID_1 = "channel_notification_01"
     private val notificationId1 = 101
 
@@ -37,21 +41,54 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         supportActionBar?.hide()
 
-        username = findViewById(R.id.inputUsername)
-        password = findViewById(R.id.inputPassword)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        val viewBinding = binding.root
+        setContentView(viewBinding)
 
-        btnSignUp = findViewById(R.id.btnSignUp)
+        binding.btnSignUp.setOnClickListener {
+            var checkRegis = false
+            val moveLogin = Intent(this, LoginActivity::class.java)
 
-        createNotificationChannel()
+            if (binding.inputUsername.text.toString().isEmpty() && binding.inputPassword.text.toString().isEmpty() && binding.inputEmail.text.toString().isEmpty() && binding.inputDate.text.toString().isEmpty() && binding.inputPhone.text.toString().isEmpty()) {
+                if (binding.inputUsername.text.toString().isEmpty()) {
+                    binding.inputUsername.setError("Username must be filled with Text")
+                }
+                if (binding.inputPassword.text.toString().isEmpty()) {
+                    binding.inputPassword.setError("Password must be filled with Text")
+                }
+                if (binding.inputEmail.text.toString().isEmpty()) {
+                    binding.inputEmail.setError("Email must be filled with Text")
+                }
+                if (binding.inputDate.text.toString().isEmpty()) {
+                    binding.inputDate.setError("Date Birth must be filled with Text")
+                }
+                if (binding.inputPhone.text.toString().isEmpty()) {
+                    binding.inputPhone.setError("Phone Number must be filled with Text")
+                }
+            } else {
+                checkRegis = true
+            }
 
-        btnSignUp.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            if (!checkRegis) return@setOnClickListener
             val mBundle = Bundle()
-            mBundle.putString("username", username.text.toString())
-            mBundle.putString("password", password.text.toString())
-            intent.putExtra("register", mBundle)
+
+            mBundle.putString("username", binding.inputUsername.text.toString())
+            mBundle.putString("password", binding.inputPassword.text.toString())
+            mBundle.putString("email",binding.inputEmail.text.toString())
+            mBundle.putString("dateBirth",binding.inputDate.text.toString())
+            mBundle.putString("phoneNumber",binding.inputPhone.text.toString())
+            moveLogin.putExtra("register",mBundle)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                db.userDao().addUser(
+                    User(0, binding.inputUsername.text.toString(), binding.inputPassword.text.toString(), binding.inputEmail.text.toString(),binding.inputDate.text.toString(),binding.inputPhone.text.toString())
+                )
+                finish()
+            }
+
             sendNotification1()
-            startActivity(intent)
+            createNotificationChannel()
+            startActivity(moveLogin)
         }
     }
 
