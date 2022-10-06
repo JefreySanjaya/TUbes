@@ -7,7 +7,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import com.example.ugd.room.NoteDB
+import com.example.ugd.room.Note
+import com.example.ugd.room.Constant
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import android.content.Context
@@ -15,11 +17,22 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
+import android.widget.Toast
 import androidx.core.app.RemoteInput
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class Home : AppCompatActivity() {
 
     lateinit var bottomNav : BottomNavigationView
+    val db by lazy { NoteDB(this) }
+    lateinit var noteAdapter: NoteAdapter
 
     //private val CHANNEL_ID_2 = "channel_notification_02"
     val channelId = "My_Channel_ID"
@@ -29,6 +42,7 @@ class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
 
         loadFragment(FragmentHome())
         bottomNav = findViewById(R.id.bottomNavigationView) as BottomNavigationView
@@ -136,8 +150,11 @@ class Home : AppCompatActivity() {
     }
 
 
-}
 
     private fun sendNotification2(){
+
+}
+
+
 
 }

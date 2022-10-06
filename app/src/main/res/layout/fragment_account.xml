@@ -8,19 +8,18 @@
 
     <ImageView
         android:id="@+id/accountProfile"
-        android:src="@drawable/l"
-        android:layout_width="0dp"
-        android:layout_height="200sp"
+        android:layout_width="366dp"
+        android:layout_height="123dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:src="@drawable/l"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSessionUsername"
@@ -48,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:hint="Mona" />
+            android:hint="-" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -74,7 +74,7 @@
             android:id="@+id/etSessionEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="mona@gmail.com"
+            android:hint="-"
             android:layout_margin="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +102,7 @@
             android:id="@+id/etSessionDateBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="22 September"
+            android:hint="-"
             android:layout_margin="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,8 +129,16 @@
             android:id="@+id/etSessionPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="089988776655"
+            android:hint="-"
             android:layout_margin="16dp"/>
+
+        <Button
+            android:id="@+id/btnTambah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="110dp"
+            android:text="Tambah Pesanan" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

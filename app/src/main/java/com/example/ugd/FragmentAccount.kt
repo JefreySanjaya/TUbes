@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import com.example.ugd.room.NoteDB
 import kotlinx.android.synthetic.main.fragment_account.*
@@ -37,6 +38,7 @@ class FragmentAccount: Fragment() {
         val showEmail: TextView = view.findViewById(R.id.etSessionEmail)
         val showDate: TextView = view.findViewById(R.id.etSessionDateBirth)
         val showPhone: TextView = view.findViewById(R.id.etSessionPhone)
+        val btnTambah : Button = view.findViewById(R.id.btnTambah)
 
         CoroutineScope(Dispatchers.IO).launch {
             val user = db?.userDao()?.getUser(sharedPreferences!!.getString("id","")!!.toInt())?.get(0)
@@ -44,6 +46,11 @@ class FragmentAccount: Fragment() {
             showEmail.setText(user?.email)
             showDate.setText(user?.dateBirth)
             showPhone.setText(user?.phoneNumber)
+        }
+
+        btnTambah.setOnClickListener {
+            val intent = Intent(activity, Activity_Tambah::class.java)
+            startActivity(intent)
         }
     }
 }

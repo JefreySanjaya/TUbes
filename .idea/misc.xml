@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/activity_adapter_note.xml" value="0.24947916666666667" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/activity_edit.xml" value="0.2484375" />
         <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/activity_tambah.xml" value="0.25" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/fragment_account.xml" value="0.264" />
+        <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/fragment_exit.xml" value="0.25" />
         <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/fragment_home.xml" value="0.264" />
       </map>
     </option>
