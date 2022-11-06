@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "geometry":{
+        "location": {
+          "lat": -7.779433,
+          "lng": 110.415782
+        }
+      },
+      "name": "Kampus 3 Universitas Atma Jaya Yogyakarta",
+      "vicinity": "Jl. Babarsari No.43, Janti, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat":  -7.780269813270702,
+          "lng": 110.4141108964126
+        }
+      },
+      "name": "Kampus 2 Universitas Atma Jaya Yogyakarta",
+      "vicinity": "Jl. Babarsari No.44, Janti, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat":  -7.776126551249272,
+          "lng":  110.39268109641262
+        }
+      },
+      "name": "Fakultas Hukum Universitas Atma Jaya Yogyakarta",
+      "vicinity": "Jl. Mrican Baru No.28, Mrican, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    }
+  ],
+  "status": "OK"
+}

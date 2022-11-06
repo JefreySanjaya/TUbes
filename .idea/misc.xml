@@ -11,6 +11,12 @@
         <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/fragment_account.xml" value="0.264" />
         <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/fragment_exit.xml" value="0.25" />
         <entry key="..\:/KULIAH/SEMESTER 5/PBP/UTS/TUbes/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/TUbes/app/src/main/res/drawable-v24/bg_rounded_rect.xml" value="0.146" />
+        <entry key="..\:/TUbes/app/src/main/res/drawable-v24/ic_baseline_location_on_24.xml" value="0.146" />
+        <entry key="..\:/TUbes/app/src/main/res/layout/activity_camera.xml" value="0.17552083333333332" />
+        <entry key="..\:/TUbes/app/src/main/res/layout/fragment_account.xml" value="0.3333333333333333" />
+        <entry key="..\:/TUbes/app/src/main/res/layout/layout_tooltip.xml" value="0.17552083333333332" />
+        <entry key="..\:/TUbes/app/src/main/res/layout/lokasi_view.xml" value="0.17552083333333332" />
       </map>
     </option>
   </component>

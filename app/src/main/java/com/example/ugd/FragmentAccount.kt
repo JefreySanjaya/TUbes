@@ -39,6 +39,8 @@ class FragmentAccount: Fragment() {
         val showDate: TextView = view.findViewById(R.id.etSessionDateBirth)
         val showPhone: TextView = view.findViewById(R.id.etSessionPhone)
         val btnTambah : Button = view.findViewById(R.id.btnTambah)
+        val btnLokasi : Button = view.findViewById(R.id.btnLokasi)
+        val btnCamera : Button = view.findViewById(R.id.btnCamera)
 
         CoroutineScope(Dispatchers.IO).launch {
             val user = db?.userDao()?.getUser(sharedPreferences!!.getString("id","")!!.toInt())?.get(0)
@@ -50,6 +52,16 @@ class FragmentAccount: Fragment() {
 
         btnTambah.setOnClickListener {
             val intent = Intent(activity, Activity_Tambah::class.java)
+            startActivity(intent)
+        }
+
+        btnCamera.setOnClickListener {
+            val intent = Intent(activity, CameraActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnLokasi.setOnClickListener{
+            val intent = Intent(activity,LokasiView::class.java)
             startActivity(intent)
         }
     }
