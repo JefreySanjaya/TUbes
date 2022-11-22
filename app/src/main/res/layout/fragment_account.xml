@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-100dp"
             android:layout_marginBottom="-10dp"
-            android:text="Camera" />
+            android:text="Pesanan" />
 
         <Button
             android:id="@+id/btnLokasi"

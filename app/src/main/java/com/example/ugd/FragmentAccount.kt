@@ -56,13 +56,13 @@ class FragmentAccount: Fragment() {
         }
 
         btnCamera.setOnClickListener {
-            val intent = Intent(activity, CameraActivity::class.java)
+            val intent = Intent(activity, PesananActivity::class.java)
             startActivity(intent)
         }
-
-        btnLokasi.setOnClickListener{
+        /* btnLokasi.setOnClickListener{
             val intent = Intent(activity,LokasiView::class.java)
             startActivity(intent)
-        }
+        }*/
+
     }
 }
