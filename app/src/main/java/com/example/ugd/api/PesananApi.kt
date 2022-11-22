@@ -2,7 +2,7 @@ package com.example.ugd.api
 
 class PesananApi {
     companion object{
-        val BASE_URL = "https://6368bba315219b84960558d7.mockapi.io/api/"
+        val BASE_URL = "https://10.113.114.217/tubes_api/public/api/"
 
         val GET_ALL_URL = BASE_URL + "pesanan/"
         val GET_BY_ID_URL = BASE_URL + "pesanan/"
