@@ -14,11 +14,14 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.app.RemoteInput
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_home.*
@@ -26,6 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.jar.Manifest
 
 
 class Home : AppCompatActivity() {
@@ -37,7 +41,11 @@ class Home : AppCompatActivity() {
     //private val CHANNEL_ID_2 = "channel_notification_02"
     val channelId = "My_Channel_ID"
     val notificationId = 1
+    val btnRequestUser = findViewById<Button>(R.id.btnRequestUser)
 
+    btnRequestUser.setOnClickListener{
+        requestPermission()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,7 +157,49 @@ class Home : AppCompatActivity() {
         }
     }
 
+    private fun writeExternalStoragePermission() =
+        ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+          PackageManager.PERMISSION_GRANTED
 
+    private fun LocationPermission() =
+        ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED
+
+    private fun LocationBackgroundPermission() =
+        ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_BACKGROUND_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED
+
+    private fun requestPermission(){
+        var requestPermissionUser = mutableListOf<String>()
+        if (!writeExternalStoragePermission()){
+            requestPermissionUser.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        if (!LocationPermission()){
+            requestPermissionUser.add(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if (!LocationBackgroundPermission()){
+            requestPermissionUser.add(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+        }
+
+        if(requestPermissionUser.isNotEmpty()){
+            ActivityCompat.requestPermissions(this, requestPermissionUser.toTypedArray(),0)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0 && grantResults.isNotEmpty()){
+            for (i in grantResults.indices){
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                    Log.d("PermissionUser", "${permissions} yang anda jalankan berhasil...")
+                }
+            }
+        }
+    }
 
     private fun sendNotification2(){
 

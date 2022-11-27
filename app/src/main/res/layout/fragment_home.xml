@@ -130,6 +130,12 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/salonku" />
 
+    <Button
+        android:id="@+id/btnRequestUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permission"
+        app:layout_constrainStart_toStartOf="parent"/>
 
 
 </FrameLayout>
