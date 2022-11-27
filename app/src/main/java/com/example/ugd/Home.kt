@@ -41,16 +41,18 @@ class Home : AppCompatActivity() {
     //private val CHANNEL_ID_2 = "channel_notification_02"
     val channelId = "My_Channel_ID"
     val notificationId = 1
-    val btnRequestUser = findViewById<Button>(R.id.btnRequestUser)
 
-    btnRequestUser.setOnClickListener{
-        requestPermission()
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        val btnRequestUser = findViewById<Button>(R.id.btnRequestUser)
+
+        btnRequestUser.setOnClickListener{
+            requestPermission()
+        }
 
         loadFragment(FragmentHome())
         bottomNav = findViewById(R.id.bottomNavigationView) as BottomNavigationView
