@@ -1,5 +1,6 @@
 package com.example.ugd
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.ugd.R
 import com.example.ugd.room.NoteDB
 import com.example.ugd.room.Note
 import com.example.ugd.room.Constant
@@ -44,15 +46,12 @@ class Home : AppCompatActivity() {
 
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val btnRequestUser = findViewById<Button>(R.id.btnRequestUser)
 
-        btnRequestUser.setOnClickListener{
-            requestPermission()
-        }
 
         loadFragment(FragmentHome())
         bottomNav = findViewById(R.id.bottomNavigationView) as BottomNavigationView

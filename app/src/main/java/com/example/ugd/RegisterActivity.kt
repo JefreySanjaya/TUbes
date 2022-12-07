@@ -11,7 +11,6 @@ import com.google.android.material.textfield.TextInputEditText
 
 import android.app.NotificationChannel
 import com.example.ugd.room.NoteDB
-import com.example.ugd.room.User
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -20,14 +19,25 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.android.volley.AuthFailureError
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.ugd.api.PesananApi
 import com.example.ugd.databinding.ActivityRegisterBinding
+import com.example.ugd.models.User
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -35,11 +45,13 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private val CHANNEL_ID_1 = "channel_notification_01"
     private val notificationId1 = 101
+    private var queue: RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         supportActionBar?.hide()
+        queue = Volley.newRequestQueue(this)
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         val viewBinding = binding.root
@@ -47,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnSignUp.setOnClickListener {
             var checkRegis = false
-            val moveLogin = Intent(this, LoginActivity::class.java)
+
 
             if (binding.inputUsername.text.toString().isEmpty() && binding.inputPassword.text.toString().isEmpty() && binding.inputEmail.text.toString().isEmpty() && binding.inputDate.text.toString().isEmpty() && binding.inputPhone.text.toString().isEmpty()) {
                 if (binding.inputUsername.text.toString().isEmpty()) {
@@ -72,23 +84,23 @@ class RegisterActivity : AppCompatActivity() {
             if (!checkRegis) return@setOnClickListener
             val mBundle = Bundle()
 
-            mBundle.putString("username", binding.inputUsername.text.toString())
-            mBundle.putString("password", binding.inputPassword.text.toString())
-            mBundle.putString("email",binding.inputEmail.text.toString())
-            mBundle.putString("dateBirth",binding.inputDate.text.toString())
-            mBundle.putString("phoneNumber",binding.inputPhone.text.toString())
-            moveLogin.putExtra("register",mBundle)
+//            mBundle.putString("username", binding.inputUsername.text.toString())
+//            mBundle.putString("password", binding.inputPassword.text.toString())
+//            mBundle.putString("email",binding.inputEmail.text.toString())
+//            mBundle.putString("dateBirth",binding.inputDate.text.toString())
+//            mBundle.putString("phoneNumber",binding.inputPhone.text.toString())
+//            moveLogin.putExtra("register",mBundle)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                db.userDao().addUser(
-                    User(0, binding.inputUsername.text.toString(), binding.inputPassword.text.toString(), binding.inputEmail.text.toString(),binding.inputDate.text.toString(),binding.inputPhone.text.toString())
-                )
-                finish()
-            }
-
+//            CoroutineScope(Dispatchers.IO).launch {
+//                db.userDao().addUser(
+//                    User(0, binding.inputUsername.text.toString(), binding.inputPassword.text.toString(), binding.inputEmail.text.toString(),binding.inputDate.text.toString(),binding.inputPhone.text.toString())
+//                )
+//                finish()
+//            }
+            Register()
             sendNotification1()
             createNotificationChannel()
-            startActivity(moveLogin)
+
         }
     }
 
@@ -128,4 +140,76 @@ class RegisterActivity : AppCompatActivity() {
             notify(notificationId1, builder.build())
         }
     }
+
+
+
+
+
+
+    private fun Register(){
+
+        val user = User(
+            binding.inputUsername.text.toString(),
+            binding.inputPassword.text.toString(),
+            binding.inputEmail.text.toString(),
+            binding.inputDate.text.toString(),
+            binding.inputPhone.text.toString()
+        )
+        val stringRequest: StringRequest =
+            object: StringRequest(Method.POST, PesananApi.register, Response.Listener { response ->
+                val gson = Gson()
+                var mahasiswa = gson.fromJson(response, User::class.java)
+
+                if(mahasiswa != null)
+                    Toast.makeText(this@RegisterActivity, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+
+                val mBundle = Bundle()
+                val moveLogin = Intent(this, LoginActivity::class.java)
+                mBundle.putString("username", binding.inputUsername.text.toString())
+                mBundle.putString("password", binding.inputPassword.text.toString())
+                mBundle.putString("email",binding.inputEmail.text.toString())
+                mBundle.putString("dateBirth",binding.inputDate.text.toString())
+                mBundle.putString("phoneNumber",binding.inputPhone.text.toString())
+                moveLogin.putExtra("register",mBundle)
+                startActivity(moveLogin)
+                finish()
+
+
+            }, Response.ErrorListener { error ->
+
+                try{
+                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toast.makeText(
+                        this,
+                        errors.getString("message"),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception){
+                    Toast.makeText(this@RegisterActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }){
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Accept"] = "application/json"
+                    return headers
+                }
+
+                @Throws(AuthFailureError::class)
+                override fun getBody(): ByteArray {
+                    val gson = Gson()
+                    val requestBody = gson.toJson(user)
+                    return requestBody.toByteArray(StandardCharsets.UTF_8)
+                }
+
+                override fun getBodyContentType(): String {
+                    return "application/json"
+                }
+            }
+
+        queue!!.add(stringRequest)
+    }
+
+
 }

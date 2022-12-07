@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets
 import kotlin.jvm.Throws
 
 class PesananActivity : AppCompatActivity() {
-    private var srPesanan: SwipeRefreshLayout? = null
+//    private var srPesanan: SwipeRefreshLayout? = null
     private var adapter: pesananAdapter? = null
     private var svPesanan: SearchView? = null
     private var layoutLoading: LinearLayout? = null
@@ -43,20 +43,20 @@ class PesananActivity : AppCompatActivity() {
 
         queue = Volley.newRequestQueue(this)
         //layoutLoading = findViewById(R.id.layout_loading)
-        srPesanan = findViewById(R.id.sr_pesanan)
-        svPesanan = findViewById(R.id.sv_pesanan)
+//        srPesanan = findViewById(R.id.sr_pesanan)
+//        svPesanan = findViewById(R.id.sv_pesanan)
 
-        srPesanan?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { allPesanan() })
-        svPesanan?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(s: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(s: String): Boolean {
-                adapter!!.filter.filter(s)
-                return false
-            }
-        })
+  //      srPesanan?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { allPesanan() })
+//        svPesanan?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(s: String): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(s: String): Boolean {
+//                adapter!!.filter.filter(s)
+//                return false
+//            }
+//        })
 
         val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
         fabAdd.setOnClickListener {
@@ -72,7 +72,7 @@ class PesananActivity : AppCompatActivity() {
     }
 
     private fun allPesanan(){
-        srPesanan!!.isRefreshing = true
+//        srPesanan!!.isRefreshing = true
         val stringRequest: StringRequest = object :
             StringRequest(Method.GET, PesananApi.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
@@ -80,14 +80,14 @@ class PesananActivity : AppCompatActivity() {
 
                 adapter!!.setPesananList(pesanan)
                 adapter!!.filter.filter(svPesanan!!.query)
-                srPesanan!!.isRefreshing = false
+  //              srPesanan!!.isRefreshing = false
 
                 if (!pesanan.isEmpty())
                     Toast.makeText(this@PesananActivity, "Data Berhasil Diambil!", Toast.LENGTH_SHORT).show()
                 else
                     Toast.makeText(this@PesananActivity, "Data Kosong!", Toast.LENGTH_SHORT).show()
             }, Response.ErrorListener { error ->
-                srPesanan!!.isRefreshing = false
+    //            srPesanan!!.isRefreshing = false
 
                 try{
                     val responseBody =

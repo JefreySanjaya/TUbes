@@ -52,9 +52,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <include
-        android:id="@+id/layout_loading"
-        layout=" @layout/layout_loading"
-        android:visibility="gone" />
+<!--    <include-->
+<!--        android:id="@+id/layout_loading"-->
+<!--        layout=" @layout/layout_loading"-->
+<!--        android:visibility="gone" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

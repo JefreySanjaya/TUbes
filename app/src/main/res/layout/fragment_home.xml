@@ -15,11 +15,7 @@
         android:layout_marginEnd="200dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/hairstyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        />
     <TextView
         android:id="@+id/HairCut"
         android:layout_width="wrap_content"
@@ -29,10 +25,7 @@
         android:layout_marginEnd="220dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Hair Cut"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+        android:textColor="@color/black" />
 
 
     <ImageView
@@ -43,8 +36,7 @@
         android:layout_marginTop="450dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/haircut"
-        app:layout_constraintTop_toBottomOf="@id/imageView2" />
+        android:src="@drawable/haircut" />
 
     <TextView
         android:id="@+id/HairStyle"
@@ -55,10 +47,7 @@
         android:layout_marginEnd="220dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Hair Style"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"/>
+        android:textColor="@color/black" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -79,10 +68,7 @@
         android:layout_marginEnd="220dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Creambath"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        android:textColor="@color/black" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -102,10 +88,7 @@
         android:layout_marginEnd="220dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Hair Model"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/FeaturedSalon"
@@ -134,8 +117,7 @@
         android:id="@+id/btnRequestUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Permission"
-        app:layout_constrainStart_toStartOf="parent"/>
+        android:text="Permission" />
 
 
 </FrameLayout>

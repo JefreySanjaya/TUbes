@@ -9,13 +9,25 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.ugd.api.PesananApi
 import com.example.ugd.databinding.ActivityLoginBinding
+import com.example.ugd.models.UserLogin
 import com.example.ugd.room.NoteDB
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.nio.charset.StandardCharsets
 
 
 class LoginActivity : AppCompatActivity() {
@@ -26,18 +38,19 @@ class LoginActivity : AppCompatActivity() {
     private val key = "nameKey"
     private val id = "idKey"
     private val myPreference = "login"
+    private var queue: RequestQueue? = null
     var sharedPreferences: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_login)
-
+        queue = Volley.newRequestQueue(this)
         getSupportActionBar()?.hide()
         sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE)
 
         val viewBinding = binding.root
-        val moveHome = Intent(this@LoginActivity, Home::class.java)
+
 
         if(!sharedPreferences!!.contains(key)){
             val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
@@ -65,21 +78,18 @@ class LoginActivity : AppCompatActivity() {
                 val users = db.userDao().getUser()
                 Log.d("LoginActivity ","dbResponse: $users")
 
-                for(i in users){
-                    if(inputUsername.text.toString() == i.username && inputPassword.text.toString() == i.password){
-                        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
-                        editor.putString("id", i.id.toString())
-                        editor.apply()
+
+//                    if(inputUsername.text.toString() == i.username && inputPassword.text.toString() == i.password){
+//                        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+//                        editor.putString("id", i.id.toString())
+//                        editor.apply()
                         checkLogin=true
-                        break
-                    }
-                }
+//                        break
+//                    }
 
                 withContext(Dispatchers.Main){
-                    if((inputUsername.text.toString() == "admin" && inputPassword.text.toString() == "admin") || (checkLogin)){
-                        checkLogin = false
-                        startActivity(moveHome)
-                        finish()
+                    if((checkLogin)){
+                        login()
                     }else {
                         if (inputLayoutUsername.getEditText()?.getText().toString().isEmpty()) {
                             inputLayoutUsername.setError("Username must be filled with Text")
@@ -102,5 +112,64 @@ class LoginActivity : AppCompatActivity() {
             startActivity(moveRegis)
         }
     }
+
+
+
+    private fun login() {
+
+
+        val userLogin = UserLogin(
+            binding.inputUsername.text.toString(),
+            binding.inputPassword.text.toString()
+        )
+
+        val user: StringRequest =
+            object : StringRequest(Request.Method.POST, PesananApi.login, Response.Listener { response ->
+                val gson = Gson()
+                var login = gson.fromJson(response, UserLogin::class.java)
+                val jsonObject = JSONObject(response)
+                if (login != null){
+                    Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
+                }
+                val moveHome = Intent(this@LoginActivity, Home::class.java)
+                val userID : SharedPreferences.Editor = sharedPreferences!!.edit()
+                userID.putInt("id", jsonObject.getJSONObject("user").getInt("id"))
+                userID.apply()
+                startActivity(moveHome)
+                finish()
+            }, Response.ErrorListener { error ->
+                try {
+                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toast.makeText(
+                        this@LoginActivity,
+                        errors.getString("message"),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }) {
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Accept"] = "application/json"
+                    return headers
+                }
+
+                @Throws(AuthFailureError::class)
+                override fun getBody(): ByteArray {
+                    val gson = Gson()
+                    val requestBody = gson.toJson(userLogin)
+                    return requestBody.toByteArray(StandardCharsets.UTF_8)
+                }
+
+                override fun getBodyContentType(): String {
+                    return "application/json"
+                }
+            }
+        queue!!.add(user)
+    }
+
 
 }
