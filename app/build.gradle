@@ -32,9 +32,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
+    dataBinding{
+        enabled=true
+    }
     viewBinding{
         enabled= true
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -49,6 +54,19 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //implementasi PDF Library IText
+    implementation 'com.itextpdf:itext7-core:7.1.13'
+    //implementasi QR Code Scanner
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
+    //implementasi QR CODE GENERATE
+    implementation 'com.github.kenglxn.qrgen:android:2.6.0'
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+    //implementasi PDF Library OpenPDF
+    implementation 'com.github.librepdf:openpdf:1.3.29'
+
+    //library toast
+    implementation 'com.github.Spikeysanju:MotionToast:1.4'
 
     def room_version = "2.4.3"
     implementation "androidx.room:room-runtime:$room_version"
