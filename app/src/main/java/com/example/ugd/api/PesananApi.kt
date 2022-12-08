@@ -2,7 +2,7 @@ package com.example.ugd.api
 
 class PesananApi {
     companion object{
-        val BASE_URL = "http://192.168.137.1/tubes_api/public/api/"
+        val BASE_URL = "http://192.168.43.80/tubes_api/public/api/"
 
         val register = BASE_URL + "register"
         val login = BASE_URL + "login"
