@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
+import kotlin.math.log
 
 
 class LoginActivity : AppCompatActivity() {
@@ -40,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
     private val myPreference = "login"
     private var queue: RequestQueue? = null
     var sharedPreferences: SharedPreferences? = null
+    var SP: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +50,10 @@ class LoginActivity : AppCompatActivity() {
         queue = Volley.newRequestQueue(this)
         getSupportActionBar()?.hide()
         sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE)
+        SP = getSharedPreferences("UserId", Context.MODE_PRIVATE)
 
         val viewBinding = binding.root
+
 
 
         if(!sharedPreferences!!.contains(key)){
@@ -132,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
                 }
                 val moveHome = Intent(this@LoginActivity, Home::class.java)
-                val userID : SharedPreferences.Editor = sharedPreferences!!.edit()
+                val userID : SharedPreferences.Editor = SP!!.edit()
                 userID.putInt("id", jsonObject.getJSONObject("user").getInt("id"))
                 userID.apply()
                 startActivity(moveHome)

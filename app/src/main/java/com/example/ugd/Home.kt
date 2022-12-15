@@ -35,7 +35,6 @@ import java.util.jar.Manifest
 
 
 class Home : AppCompatActivity() {
-
     lateinit var bottomNav : BottomNavigationView
     val db by lazy { NoteDB(this) }
     lateinit var noteAdapter: NoteAdapter
@@ -50,6 +49,7 @@ class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        getSupportActionBar()?.hide()
 
 
 
@@ -83,6 +83,14 @@ class Home : AppCompatActivity() {
 
                 }
             }
+        }
+    }
+    fun changeFragment(fragment: Fragment){
+        if(fragment !=null){
+            getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit()
         }
     }
     private  fun loadFragment(fragment: Fragment){
