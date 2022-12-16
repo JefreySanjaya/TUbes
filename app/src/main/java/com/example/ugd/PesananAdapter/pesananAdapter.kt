@@ -41,8 +41,8 @@ class pesananAdapter (private var pesananList: List<Pesanan>, context: Context) 
     }
 
     fun setPesananList(mahasiswaList: Array<Pesanan>){
-        this.pesananList = pesananList.toList()
-        filteredPesananList = pesananList.toMutableList()
+        this.pesananList = mahasiswaList.toList()
+        filteredPesananList = mahasiswaList.toMutableList()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){

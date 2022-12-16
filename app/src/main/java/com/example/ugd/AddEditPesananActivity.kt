@@ -7,8 +7,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.view.View
-import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -17,20 +15,10 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.ugd.PesananAdapter.pesananAdapter
 import com.example.ugd.api.PesananApi
+import com.example.ugd.databinding.ActivityAddPesananBinding
 import com.example.ugd.models.Pesanan
 import com.google.gson.Gson
-import org.json.JSONObject
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.lang.Exception
-import java.nio.charset.StandardCharsets
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import kotlin.jvm.Throws
 import com.itextpdf.barcodes.BarcodeQRCode
 import com.itextpdf.io.image.ImageDataFactory
 import com.itextpdf.io.source.ByteArrayOutputStream
@@ -45,7 +33,14 @@ import com.itextpdf.layout.element.Paragraph
 import com.itextpdf.layout.element.Table
 import com.itextpdf.layout.property.HorizontalAlignment
 import com.itextpdf.layout.property.TextAlignment
-import com.example.ugd.databinding.ActivityAddPesananBinding
+import org.json.JSONObject
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.nio.charset.StandardCharsets
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class AddEditPesananActivity : AppCompatActivity() {
     companion object{
@@ -144,15 +139,18 @@ class AddEditPesananActivity : AppCompatActivity() {
                 etRincian!!.text.toString(),
                 edPesanan!!.text.toString(),
             )
+
             val stringRequest: StringRequest =
                 object : StringRequest(Method.POST, PesananApi.ADD_URL, Response.Listener { response ->
                     val gson = Gson()
                     val pesanan = gson.fromJson(response, Pesanan::class.java)
 
+                    println(etNama!!.text.toString())
+
                     if (pesanan != null)
                         Toast.makeText(this@AddEditPesananActivity, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
 
-                    createPdf(pesanan.nama, pesanan.rincian, pesanan.jenisPesanan)
+//                    createPdf(pesanan.nama, pesanan.rincian, pesanan.jenisPesanan)
                     val returnIntent = Intent()
                     setResult(RESULT_OK, returnIntent)
                     finish()
@@ -184,6 +182,7 @@ class AddEditPesananActivity : AppCompatActivity() {
                         return requestBody.toByteArray(StandardCharsets.UTF_8)
 
                     }
+//
 
                     override fun getBodyContentType(): String {
                         return "application/json"

@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true"
     tools:context=".PesananActivity">
 
-    <androidx.appcompat.widget.SearchView
+    <SearchView
         android:id="@+id/sv_pesanan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

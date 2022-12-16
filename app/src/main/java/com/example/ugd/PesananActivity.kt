@@ -82,7 +82,14 @@ class PesananActivity : AppCompatActivity() {
         val stringRequest: StringRequest = object :
             StringRequest(Method.GET, PesananApi.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
-                var pesanan : Array<Pesanan> = gson.fromJson(response, Array<Pesanan>::class.java)
+
+                val jsonObject = JSONObject(response)
+
+                var pesanan : Array<Pesanan> = gson.fromJson(
+                    jsonObject.getJSONArray("data").toString(),
+                    Array<Pesanan>::class.java)
+
+                println(pesanan[0].nama)
 
                 adapter!!.setPesananList(pesanan)
                 adapter!!.filter.filter(svPesanan!!.query)
@@ -150,7 +157,7 @@ class PesananActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == LAUNCH_ADD_ACTIVITY && requestCode == RESULT_OK) allPesanan()
+//        if (resultCode == LAUNCH_ADD_ACTIVITY && requestCode == RESULT_OK) allPesanan()
     }
 
     private fun setLoading(isLoading: Boolean) {
